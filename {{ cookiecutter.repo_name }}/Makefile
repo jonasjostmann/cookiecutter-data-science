@@ -18,12 +18,11 @@ endif
 #################################################################################
 
 ## Install Python Dependencies
-requirements: test_environment
-	pipenv install
+requirements:
+	pipenv install --dev
 
 ## Make Dataset
 data: requirements
-	pipenv shell
 	python src/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
@@ -37,11 +36,13 @@ lint:
 
 ## Set up python interpreter environment
 create_environment:
+	pipenv install --dev
 
+activate_environment:
+	pipenv shell
 
 ## Test python environment is setup correctly
 test_environment:
-	pipenv shell
 	python test_environment.py
 
 #################################################################################
